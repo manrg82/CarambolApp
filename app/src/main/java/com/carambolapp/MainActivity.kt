@@ -16,7 +16,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Label
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -26,10 +29,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.helper.widget.Carousel
 import com.carambolapp.ui.theme.CarambolappTheme
 
 
@@ -51,10 +55,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         Header()
                         Spacer(modifier = Modifier.height(48.dp))
-                        DescriptionText()
-                        Spacer(modifier = Modifier.height(48.dp))
-                        StartButton()
-
+                        Registro()
                     }
                 }
             }
@@ -109,6 +110,104 @@ class MainActivity : ComponentActivity() {
                 style = MaterialTheme.typography.titleMedium
             )
         }
+    }
+
+    @Composable
+    fun CampoTexto(
+        label: String,
+        isPassword: Boolean = false
+    ) {
+        Text(
+            text = label,
+            modifier = Modifier.fillMaxWidth()
+
+        )
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            modifier = Modifier.fillMaxWidth(),
+            visualTransformation = if (isPassword)
+                PasswordVisualTransformation()
+            else
+                VisualTransformation.None
+        )
+    }
+
+
+    @Composable
+    fun Registro(modifier: Modifier = Modifier) {
+        Column(
+            modifier = modifier.fillMaxWidth()
+        ) {
+
+            Text(
+                text = "Registrarse",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Center
+            )
+
+            Text(
+                text = "¿Ya registrado? Iniciar sesión",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Center
+            )
+
+
+            CampoTexto(label = "Nombre")
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            CampoTexto(label = "Correo")
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            CampoTexto(
+                label = "Contraseña",
+                isPassword = true
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = "Fecha de nacimiento",
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            OutlinedTextField(
+                value = "",
+                onValueChange = {},
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = {
+                    Text("Seleccionar")
+                },
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.ArrowDropDown,
+                        contentDescription = null
+                    )
+                }
+            )
+            Button(
+                onClick = { /* MANDAR A LOGIN (Para iniciar sesión) */ },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Text(
+                    text = "Registrarse",
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+        }
+
     }
 
 }
