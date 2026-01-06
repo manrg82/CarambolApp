@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -28,6 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -42,20 +45,33 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            CarambolappTheme {
+            CarambolappTheme(darkTheme = true) {
                 Scaffold(
                     containerColor = MaterialTheme.colorScheme.background
                 ) { padding ->
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(padding)
-                            .padding(horizontal = 24.dp),
+                            .padding(padding),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Header()
+<<<<<<< Updated upstream
                         Spacer(modifier = Modifier.height(48.dp))
                         Registro()
+=======
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 24.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Spacer(modifier = Modifier.height(48.dp))
+                            Descripcion()
+                            Spacer(modifier = Modifier.height(48.dp))
+                            BtnEmpezar()
+                        }
+>>>>>>> Stashed changes
                     }
                 }
             }
@@ -64,29 +80,31 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun Header() {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+        Box(
+            modifier = Modifier.fillMaxWidth()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.logoappfin),
-                contentDescription = "Carambol Logo",
-                modifier = Modifier.size(80.dp)
+                painter = painterResource(id = R.drawable.logo1),
+                contentDescription = "CarambolApp Logo",
+                modifier = Modifier
+                    .size(100.dp)
+                    .align(Alignment.TopStart)
             )
-
-            Spacer(modifier = Modifier.width(12.dp))
 
             Text(
                 text = "CarambolApp",
                 style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onBackground
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(top = 28.dp)
             )
         }
     }
 
+
     @Composable
-    fun DescriptionText() {
+    fun Descripcion() {
         Text(
             text = "Descubre innumerables recetas, gestiona tu despensa de forma inteligente y apoya al comercio local desde nuestra aplicación.",
             style = MaterialTheme.typography.bodyLarge,
@@ -97,13 +115,13 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun StartButton() {
+    fun BtnEmpezar() {
         Button(
             onClick = { /* MANDAR A LOGIN */ },
-            modifier = Modifier
-                .fillMaxWidth()
+            modifier = Modifier.width(200.dp)
                 .height(56.dp),
             shape = RoundedCornerShape(16.dp)
+
         ) {
             Text(
                 text = "Empezar",
